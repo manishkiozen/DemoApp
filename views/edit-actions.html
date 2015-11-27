@@ -1,0 +1,217 @@
+    <% include header.html   %>
+    <% include sidebar.html   %> 
+       
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			
+      <div class="row addDeviceContent">
+			  <!-- begin col-3 -->
+			    <div class="col-md-6 col-sm-6"> 
+
+          <form class="add-module" action="<%=url %>/actions/updateAction" method="post">
+            <h2>Create Action</h2> 
+
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Action Name</label>
+                <input type="text" id="actionName" name="actionName" class="form-control input-group" placeholder="Action Name" value="<%=action.name %>" autofocus>
+                <span class="actionName-msg"></span>
+              </div>
+
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Sensor</label>
+                <select name="sensorId" id="sensorId" class="form-control input-group">
+                    <option value="">Select Sensor</option>
+                    <% if(sensors.length > 0){ %>
+                      <% sensors.forEach(function(val, key){ %>
+                       <option value="<%=val.id%>" <% if(action.sensorId == val.id){ %> selected <%} %> ><%=val.name%></option>
+                      <% }) %>
+                    <% } %>
+                </select>
+                <input type="hidden" name="sensorName" id="sensorName" value="<%=action.sensorName %>">
+                <span class="sensorId-msg"></span>
+              </div>
+
+               <div class="form-group">
+                <label for="inputEmail" class="sr-only">Function</label>
+                  <div id="functions-list">
+                    <select name="functions" id="function" class="form-control input-group">
+                        <option value="">Select Function</option>
+                       <!--  <option value="first">First Function</option>
+                        <option value="second">Second Function</option> -->
+                    </select>
+                  </div>
+                  <input type="hidden" id="functionName" name="functionName" value="<%=action.functions %>"> 
+                <span class="function-msg"></span>
+              </div>
+
+
+               <div class="form-group">
+                <label for="inputEmail" class="sr-only">Operator</label>
+                <select id="operator" name="operators" class="form-control input-group">
+                    <option value="">Select Operator</option>
+                    <option <% if(action.operators == '=='){ %> selected <%} %> value="==">Equal</option>
+                    <option <% if(action.operators == '!'){ %> selected <%} %> value="!=">Not equal</option>
+                    <option <% if(action.operators == '>'){ %> selected <%} %> value=">">Greater then</option>
+                    <option <% if(action.operators == '>='){ %> selected <%} %> value=">=">Greater then equal</option>
+                    <option <% if(action.operators == '<'){ %> selected <%} %> value="<">Less then</option>
+                    <option <% if(action.operators == '<='){ %> selected <%} %> value="<=">Less then equal</option>                   
+                </select>
+                <span class="operator-msg"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Value</label>
+                <input type="text" id="value" name="value" class="form-control input-group" placeholder="Action value" value="<%=action.value %>" autofocus>
+                <span class="value-msg"></span>
+
+                 <input type="hidden" id="d" name="d" value="<%=action._id %>"> 
+              </div>
+
+              <!-- <div class="checkbox" >
+                  <p></p>
+              </div>
+              -->
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Update Action</button>
+
+          </form>
+          </div>   
+			  <!-- end row -->
+						
+		</div>
+		<!-- end #content -->
+		
+       
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+
+  <script type="text/javascript">
+
+    var functionId = '<%= action.functionId %>';
+
+    $('.add-module').submit(function(){
+
+        if( $('#actionName').val() == '' ){
+            $('.actionName-msg').text('Please enter action name*');
+            $('#actionName').focus();
+            return false;
+        }
+         
+        if( $('#sensorId').val() == '' ){
+            $('.sensorId-msg').text('Please select sensor*');
+            $('#sensorId').focus();
+            return false;
+        }
+
+        if( $('#function').val() == '' ){
+            $('.function-msg').text('Please select function*');
+            $('#function').focus();
+            return false;
+        }
+
+        if( $('#operator').val() == '' ){
+            $('.operator-msg').text('Please select operator*');
+            $('#operator').focus();
+            return false;
+        }
+
+        if( $('#value').val() == '' ){
+            $('.value-msg').text('Please enter action value*');
+            $('#value').focus();
+            return false;
+        }
+
+        if( checkActionName() == false ){
+            $('.actionName-msg').text('Action name not available*');
+            return false;
+        }
+        return true;
+    });
+
+    // get functions list according sensors
+    $('#sensorId').change(function(){
+        getFunctions( $(this).val() );
+    }); 
+
+    // get functions name
+    function getFunctions(sensorId){
+       $.post( "/functions/getFunctions", {sensorId: sensorId}, function( data ) {
+
+            if( data.length > 0 ){
+              var selectFlag = '';
+
+              var html = '<select name="functions" id="function" class="form-control input-group">'
+                        +'<option>Select Function</option>';
+                 $.each(data, function(key, val){
+                     selectFlag = ( functionId == val._id )? 'selected' : ''; 
+                     html += '<option value="'+val._id+'" '+selectFlag+'>'+val.name+'</option>';
+                 });   
+
+                 html += '</select>';   
+
+                $( "#functions-list" ).html( html );  
+            }
+            else{
+                alert('Functions does not exists');
+            }
+        });
+    }
+
+    // get functions
+    getFunctions('<%= action.sensorId %>');
+
+    // get selected option text value-msg
+    $('#sensorId').change(function(){
+        $('#sensorName').val($("#sensorId option:selected").text());
+    });
+
+     // get selected option text value-msg
+    $(document).on('change','#function', function(){
+        $('#functionName').val($("#function option:selected").text());
+    });
+
+    // check action name as unique
+    $('#actionName').blur(function(){
+         if( checkActionName() == false ){
+            $('.actionName-msg').text('Action name not available*');
+            return false;
+        }
+
+        $('.actionName-msg').text('');
+    });
+
+
+   function checkActionName(){
+
+      if( $('#actionName').val() != '' ){
+
+          var flag = false;
+        
+          $.ajax({
+              url: '<%=url%>/actions/checkActionName',
+              type: 'POST',
+              async: false,
+              data: { actionName: $('#actionName').val(), id: $('#d').val() },
+              success: function(data){
+                if(data == 1){
+                  flag = false;
+                }
+                else{
+                   flag = true;
+                }
+              }
+          });
+
+         return flag; 
+      }
+      
+   }
+
+  </script>

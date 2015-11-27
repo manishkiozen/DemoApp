@@ -1,0 +1,112 @@
+    <% include header.html   %>
+    <% include sidebar.html   %>
+       
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			
+      <div class="row addDeviceContent">
+			  <!-- begin col-3 -->
+			    <div class="col-md-6 col-sm-6"> 
+
+          <form class="add-module" action="<%=url %>/modules/addModule" method="post" enctype="multipart/form-data">
+            <h2>Add New Module</h2> 
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Device</label>
+                <select name="deviceId" id="deviceId" class="form-control input-group">
+                    <option value="">Select Device</option>
+                    
+                    <% if(device.length > 0){ %>
+                    
+                        <% device.forEach(function(val, key){ %><option value="<%=val._id%>"><%=val.name%></option>
+                        <% }) %>
+
+                    <% } %>
+
+                </select>
+                <input type="hidden" id="deviceName" name="deviceName">
+                <span class="deviceId-msg"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Module Name</label>
+                <input type="text" id="moduleName" name="moduleName" class="form-control input-group" placeholder="Module Name" autofocus>
+                <span class="moduleName-msg"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Module Image</label>
+                <input type="file" id="image" name="image" class="form-control input-group" placeholder="Username" autofocus>
+                <span class="image-msg"></span>
+                <span>Standard size: 70x85 Dimension (width = 70 and height = 85)</span>
+              </div>
+
+
+              <!-- <div class="checkbox" >
+                  <p></p>
+              </div>
+ -->
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Add Module</button>
+
+          </form>
+          </div>   
+			  <!-- end row -->
+						
+		</div>
+		<!-- end #content -->
+		
+       
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+
+  <script type="text/javascript">
+    var _URL = window.URL;
+    // $("#image").change(function (e) {
+    //     var file, img;
+    //     if ((file = this.files[0])) {
+    //         img = new Image();
+    //         img.onload = function () {
+    //             if( this.width > 70 || this.height > 90){
+    //               alert("File size too much. You can't upload it");
+    //               $("#image").val('');
+    //               $("#image").focus();
+    //             }
+    //             //this will give you image width and height and you can easily validate here....
+    //         };
+    //         img.src = _URL.createObjectURL(file);
+    //     }
+    // });
+
+    $('#deviceId').change(function(){
+        $('#deviceName').val($('#deviceId option:selected').text()); 
+    })
+
+    $('.add-module').submit(function(){
+        
+        if( $('#deviceId').val() == '' ){
+            $('.deviceId-msg').text('Please select device*');
+            $('#deviceId').focus();
+            return false;
+        }
+
+        if( $('#moduleName').val() == '' ){
+            $('.moduleName-msg').text('Please enter module name*');
+            $('#moduleName').focus();
+            return false;
+        }
+
+         if( $('#image').val() == '' ){
+            $('.image-msg').text('Please select module image*');
+            $('#image').focus();
+            return false;
+        }
+
+        return true;
+    });
+
+  </script>

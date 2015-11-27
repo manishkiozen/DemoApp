@@ -1,0 +1,213 @@
+    <% include header.html   %>
+    <% include sidebar.html   %>
+
+    <style type="text/css">
+
+    .whiteText, label{
+        color: #fff !important;
+    }
+
+    .k-state-default{
+        height: 31px;
+    }
+
+    </style>
+        
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			
+      <div class="row addDeviceContent">
+			  <!-- begin col-3 -->
+
+			    <div class="col-md-6 col-sm-6"> 
+           
+            <h2 class="form-signin-heading whiteText" style="font-size:20px;">Update Alarm</h2>
+          <form class="add-device" action="<%=url%>/alarm/updateAlarm" method="GET">
+            
+              <div class="form-group">
+                <label for="inputEmail whiteText" class="">Alarm Name</label>
+                <input type="text" name="alarmName" id="alarmName" value="<%= alarm.name %>" placeholder="Alarm Name" class="form-control input-group">
+                <span class="alarmName-msg"></span>
+              </div>
+
+              <% if(  alarm.sensors.length > 0 ){ 
+
+                  alarm.sensors.forEach(function(value, key){
+                %>
+                <div class="add-actions">
+
+                  <% if( key > 0 ){ %>
+
+                  <div class="form-group">
+                    <label for="inputEmail" class="sr-only">Condition</label>
+                    <select name="condition[]" id="action-'<%=(key-1) %>'" class="form-control input-group">
+                        <option <% if( alarm.condition[key-1] == "&&" ){ %>selected <% } %> value="&&">And</option>
+                        <option <% if( alarm.condition[key-1] == "||" ){ %>selected <% } %> value="||">OR</option>
+                      </select>
+
+                  </div>
+                  
+                  <% } %>    
+
+                  <div class="form-group">
+                   <div class="sensors-list">
+                    <label for="inputEmail whiteText" class="">Sensor </label>
+                    <select id="sensor" name="sensorId[]" class="form-control input-group sensor">
+                        <option value="">Select Sensor</option>
+
+                        <% if(sensors.length > 0){
+                         
+                          sensors.forEach(function(val, key){ %>
+                        
+                        <option value="<%=val._id%>" <% if( value == val._id ){ %>selected <% } %> ><%=val.name%></option>
+                        
+                        <% }) 
+
+                        }
+
+                        %>
+
+                    </select>
+                    <input type="hidden" name="sensorName[]" value="<%=alarm.sensorsName[key] %>">
+                    <span class="sensor-msg"></span>
+                    </div>
+                  </div>                 
+
+                  <div class="form-group">
+                    
+                    <label for="inputEmail whiteText" class="sr-only">Action</label>
+                   
+                    <div <% if( key == 0 ){ %> id="actions-list" <% } %> class="action-<%=key %>"><div class="sensor-action">
+                      <select name="action[]" class="form-control input-group action_list">
+                          <option >Select Action</option>
+                      </select><span class="action-msg"></span></div>
+                    </div>
+
+                    <% if( key == 0 ){ %>                
+                      <div class="more-action whiteText" style="cursor:pointer;">Add</div>
+                    <% } else { %>
+                      <div class="remove-action whiteText" style="cursor:pointer;">Remove</div>
+                     <% } %>  
+                  </div>
+
+                </div>  
+              <%    
+                    }) 
+                  }
+              %>
+
+              <div id="more-action"></div>
+
+              <div class="form-group">
+
+                  <input type="text" style="width: 50%; float: right;<% if( alarm.time == 'time' ){ %> display:none; <% } %>" <% if( alarm.time == 'interval' ){ %>name="time_value" <% } %> value="<%= alarm.time_value %>" id="time_value" class="form-control input-group" placeholder="Interval Time">
+
+                  <span class="time_picker" <% if( alarm.time == 'interval' ){ %> style="display:none;" <% } %> >
+
+                   <input type="text" 
+                   <% if( alarm.time == 'interval' ){ %>  name="time_value" <% } %>
+                   style="width: 50%; float: right;" id="time_picker" class="form-control input-group" placeholder="Time" value="<%= alarm.time_value %>" > 
+
+                  </span> 
+
+                  <label class="whiteText">Set Interval</label>
+                  <input type="radio" id="interval" name="time" value="interval" <% if( alarm.time == 'interval' ){ %> checked <% } %> >
+                  <label class="whiteText">Set Time</label>
+                  <input type="radio" id="time" name="time" value="time" <% if( alarm.time == 'time' ){ %> checked <% } %> >
+                  
+                  <div class="time-msg"></div>
+
+              </div>
+
+              <div class="form-group">
+               
+                  <label class="whiteText">Send SMS</label>
+                  <input type="checkbox" name="aletby[]" id="sms" value="sms" <% if( alarm.aletby.indexOf('sms') != -1 ){ %> checked <% } %> >
+                 
+                  <label class="whiteText">Send Mail</label>
+                  <input type="checkbox" name="aletby[]" id="mail" value="mail" <% if( alarm.aletby.indexOf('mail') != -1 ){ %> checked <% } %> >
+
+                  <label class="whiteText">Call to Action</label>
+                  <input type="checkbox" name="aletby[]" id="callToAction" value="callToAction" <% if( alarm.aletby.indexOf('callToAction') != -1 ){ %> checked <% } %> >
+
+                  <div class="alertby-msg"></div>
+              </div>
+               <div class="form-group" <% if( alarm.aletby.indexOf('callToAction') == -1 ){ %> style="display:none;" <% } %>  id="callAction">
+                  <input type="text" id="call-action" name="callActionName" class="form-control input-group" placeholder="Call To Action" value="<%= alarm.calltoaction %>" >
+                   <span class="call-to-action-msg"></span>
+               </div>
+
+                <div class="checkbox">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Update Alarm</button>
+                </div>
+                <input type="hidden" name="d" value="<%=alarm._id%>">
+          </form>
+          </div>   
+			  <!-- end row -->
+						
+		</div>
+		<!-- end #content -->
+		
+       
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+
+ <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css" />
+  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.default.min.css" />
+
+  <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script> 
+
+  <script type="text/javascript" src="<%=url%>/assets/appjs/alarm.js"></script>
+
+  <script type="text/javascript"> 
+
+    function getActionsName(sensorId, selected, actionName, id ){
+      
+      $.ajax({
+        url:'/actions/getActions',
+        type: 'post',
+        async: false,
+        data: { sensorId: sensorId },
+        success:function(result){
+      //$.post( "/actions/getActions", { sensorId: sensorId }, function( result ) {
+
+          if(result.length > 0){
+
+            var action='<select name="action[]" class="form-control input-group action_list">';
+
+            $.each(result, function(index, elem){
+
+                  var selectedOption = ( selected ==  elem._id)? 'selected' : '';
+                  action += '<option value="'+elem._id+'" '+selectedOption+'>'+elem.name+'</option>';
+            });             
+            
+            action += '</select>'
+                       +'<input type="hidden" name="actionName[]" value="'+actionName+'"' +'class="actionName"><span class="action-msg"></span>';
+            
+            id.find('.sensor-action').html(action);
+          }  
+
+        }       
+
+      });
+
+    }
+
+    <%  if(sensors.length > 0){
+           alarm.sensors.forEach(function(value, key){ %>
+            
+            setTimeout(function(){
+                  getActionsName('<%=value %>', '<%=alarm.action[key] %>', '<%=alarm.actionsName[key] %>', $('.action-<%=key %>') );
+            }, 1000); 
+
+    <%
+          });
+        }
+    %>
+
+  </script>

@@ -1,0 +1,433 @@
+    <% include header.html   %>
+    <% include sidebar.html   %>
+       <!-- css -->
+       
+       
+       <link rel="stylesheet" type="text/css" href="http://www.highcharts.com/joomla/media/com_demo/highslide.css" />
+       <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+       <!-- <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"> </script> -->
+    <style type="text/css">
+       #content .addDeviceContent	.tab-content .tab-pane {
+    			position: initial;
+			}
+			#things .datepiker{
+				margin: 40px 10px 10px -106px;
+    			position: initial;
+			}
+
+			#things .thingsOption{
+				 margin: 89px 89px 89px -327px;
+   				 position: absolute;
+   				  width: 328px;
+			}
+			#sensor .datepiker{
+				margin: 40px 10px 10px -106px;
+    			position: initial;
+			}
+
+			#sensor .sensorOption{
+				 margin: 89px 89px 89px -327px;
+   				 position: absolute;
+   				  width: 328px;
+			}
+			#module .datepiker{
+				margin: 40px 10px 10px -106px;
+    			position: initial;
+			}
+
+			#module .moduleOption{
+				 margin: 89px 89px 89px -327px;
+   				 position: absolute;
+   				  width: 328px;
+			}
+			.chartcontainer{
+				  margin: 57px 57px 57px 43px;
+    				position: relative;
+			}
+			.customchart{
+				margin: 15px;
+			}
+			.chartrow
+			{
+				margin: 15px;
+			}
+			.sliders{
+				float: none;
+			    clear: both;
+			    margin: 10px;
+			    margin-top: 281px;
+			}
+			.chart {
+		    min-width: 320px;
+		    max-width: 800px;
+		    height: 220px;
+		    margin: 0 auto;
+		}
+		</style>
+       <!-- end css -->
+  
+
+	
+
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			<!-- begin row -->
+			<div class="row addDeviceContent">
+			    
+
+				<div class="">
+				  <ul class="nav nav-tabs">
+				    <li class="active"><a data-toggle="tab" href="#things">Things</a></li>
+				    <li><a data-toggle="tab" href="#sensor">Sensor</a></li>
+				    <li><a data-toggle="tab" href="#module">Module</a></li>
+				  </ul>
+
+			  <div class="tab-content">
+
+				  	<!--            Things Section          -->
+
+				    <div id="things" class="tab-pane active">
+				     	<!--input class="datepiker" id="thingsDateFrom" type="text" placeholder="Date From"/>
+				     	<input id="thingsDateTo" type="text" placeholder="Date To"/>
+
+
+						<select class="thingsOption" class="form-control" id="things">
+					        <option>1</option>
+					        <option>2</option>
+					        <option>3</option>
+					        <option>4</option>
+					      </select-->
+
+					      <div class="chartcontainer">
+
+					      	 <!--ul class="nav nav-tabs">
+							    <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
+							     <li><a data-toggle="tab" href="#areacharts">Area Chart</a></li>
+							    <li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>
+							    <li><a data-toggle="tab" href="#columnchart">Column Chart</a></li>
+							    <li><a data-toggle="tab" href="#scatterchart">Scatter Chart</a></li>
+							     <li><a data-toggle="tab" href="#combinationchart">Combination Chart</a></li>
+							     <li><a data-toggle="tab" href="#dynamicchart">Dynamic Chart</a></li>
+							     <li><a data-toggle="tab" href="#3dchart">3D Chart</a></li>
+							     <li><a data-toggle="tab" href="#gaugeschart">Gauges Chart</a></li>
+							      <li><a data-toggle="tab" href="#morechart">More Chart</a></li>
+							  </ul-->	
+
+							   <div class="charts tab-content">
+
+							   		<div id="linechart" class="tab-pane active">
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="lineheight1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="lineheight2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="lineheight3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   				<div class="chart col-sm-6" id="lineheight4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="lineheight5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="lineheight6" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="lineheight7" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="lineheight8" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="lineheight9" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							   				
+							   			</div>
+
+
+							   		</div>
+							   		<div id="areacharts" class="tab-pane">
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="areachart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="areachart2" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="areachart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="areachart4" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="areachart5" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="areachart6" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="areachart7" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="areachart8" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="areachart9" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+				
+							   			</div>
+							   		</div>
+							   		<div id="piechart" class="tab-pane">
+							   			
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="piechart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="piechart2" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="piechart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="piechart4" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="piechart5" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="piechart6" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="piechart7" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   		</div>
+							   		
+							   		<div id="columnchart" class="tab-pane">
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="coloumchart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="coloumchart2" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="coloumchart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="coloumchart4" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="coloumchart5" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="coloumchart6" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="coloumchart7" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="coloumchart8" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="coloumchart9" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				
+							   			</div>
+							   		</div>
+							   		<div id="scatterchart" class="tab-pane">
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="scatterchart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="scatterchart2" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="scatterchart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>	
+							   			</div>
+							   		</div>
+							   		<div id="combinationchart" class="tab-pane">
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="combinationchart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="combinationchart2" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="combinationchart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="combinationchart4" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   		</div>
+							   		<div id="dynamicchart" class="tab-pane">
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="dynamicchart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="dynamicchart2" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="dynamicchart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				
+							   			</div>
+							   		</div>
+							   		<div id="3dchart" class="tab-pane">
+							   			<div class="row chartrow">
+							   				<div class="col-sm-6">
+							   				<div class="customchart col-sm-6" id="3dchart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="sliders">
+												<table>
+													<tr><td>Alpha Angle</td><td><input id="3d1R0" type="range" min="0" max="45" value="15"/> <span id="3d1R0-value" class="value"></span></td></tr>
+												    <tr><td>Beta Angle</td><td><input id="3d1R1" type="range" min="0" max="45" value="15"/> <span id="3d1R1-value" class="value"></span></td></tr>
+												</table>
+											</div>
+											</div>
+							   				<div class="customchart col-sm-6" id="3dchart2" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="3dchart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="3dchart4" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="3dchart5" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="3dchart6" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   		</div>
+							   		<div id="gaugeschart" class="tab-pane">
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="gaugesschart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6"  style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto">
+													<div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
+													<div id="container-rpm" style="width: 300px; height: 200px; float: left"></div>
+							   				</div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="gaugesschart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="gaugesschart4 " style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>\
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="gaugesschart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="gaugesschart4 " style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   		</div>
+							   		<div id="morechart" class="tab-pane">
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="morechart1" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="morechart2" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="morechart3" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="morechart5" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   			<div class="row chartrow">
+							   				<div class="customchart col-sm-6" id="morechart6" style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   				<div class="customchart col-sm-6" id="morechart7 " style="min-width: 180px; height: 270px; max-width: 480px; margin: 0 auto"></div>
+							   			</div>
+							   		</div>
+							   </div>		
+
+					      </div>
+
+
+
+				    </div>
+
+				    <!--            Sensor Section          -->
+				    <div id="sensor" class="tab-pane">
+				        <input class="datepiker" id="sensorDateFrom" type="text" placeholder="Date From"/>
+				     	<input id="sensorDateTo" type="text" placeholder="Date To"/>
+
+
+						<select class="sensorOption" class="form-control" id="things">
+					        <option>1</option>
+					        <option>2</option>
+					        <option>3</option>
+					        <option>4</option>
+					      </select>
+				    </div>
+
+				     <!--            Module Section          -->
+				    <div id="module" class="tab-pane">
+				     <input class="datepiker" id="moduleDateFrom" type="text" placeholder="Date From"/>
+				     	<input id="moduleDateTo" type="text" placeholder="Date To"/>
+
+
+						<select class="moduleOption" class="form-control" id="things">
+					        <option>1</option>
+					        <option>2</option>
+					        <option>3</option>
+					        <option>4</option>
+					      </select>
+				    </div>
+				  </div>
+				</div>
+
+
+
+		<!-- end #content -->
+		
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+  <script src="<%= url %>/assets/plugins/chartsjs/highchart.js"> </script>
+
+  
+  
+  
+  
+  
+ <script src="http://code.highcharts.com/highcharts-more.js"></script>
+ <script src="http://code.highcharts.com/modules/heatmap.js"></script>
+  <script src="http://code.highcharts.com/modules/data.js"></script>
+  <script src="http://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="http://code.highcharts.com/modules/funnel.js"></script>
+   <script src="<%= url %>/assets/plugins/chartsjs/exporting.js"> </script>
+    <script src="http://code.highcharts.com/modules/solid-gauge.js"></script>
+   <script src="http://www.highcharts.com/joomla/media/com_demo/js/highslide-full.min.js"></script>
+   <script src="http://www.highcharts.com/joomla/media/com_demo/js/highslide.config.js" charset="utf-8"></script>
+    
+       
+        
+      
+   <script type="text/javascript">
+		
+		 $("#thingsDateTo").datepicker();
+		 $("#thingsDateFrom").datepicker();
+		 
+		 
+		  $("#sensorDateFrom").datepicker();
+		 $("#sensorDateTo").datepicker();
+		 
+		 
+		  $("#moduleDateFrom").datepicker();
+		 $("#moduleDateTo").datepicker();
+		  
+    
+   </script>
+     <script>
+  Highcharts.theme = {
+    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', 
+             '#FF9655', '#FFF263', '#6AF9C4'],
+    chart: {
+        backgroundColor: {
+            linearGradient: [0, 0, 500, 500],
+            stops: [
+                [0, 'rgb(47, 48, 51)'],
+                [1, 'rgb(33, 34, 38)']
+            ]
+        },
+    },
+    title: {
+        style: {
+            color: '#6a6f75',
+			
+            font: ' 16px "Helvetica Neue",Helvetica,Arial,sans-serif'
+        }
+    },
+    subtitle: {
+        style: {
+            color: '#6a6f75',
+            font: ' 12px "Helvetica Neue",Helvetica,Arial,sans-serif'
+        }
+    },
+
+    legend: {
+        itemStyle: {
+            font: '9pt "Helvetica Neue",Helvetica,Arial,sans-serif',
+            color: 'black' 
+        },
+        itemHoverStyle:{
+            color: 'gray'
+        }   
+    }
+};
+
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+  </script>
+  <style>
+  .customchart{
+  width:800px;
+  margin-bottom:50px;
+  }
+</style>
+  <script src="<%= url %>/assets/appjs/customcharts.js"> </script>
+   <script src="<%= url %>/assets/appjs/piechart.js"> </script>
+    <script src="<%= url %>/assets/appjs/column.js"> </script>
+    <script src="<%= url %>/assets/appjs/combinationchart.js"> </script>
+    <script src="<%= url %>/assets/appjs/dynamic.js"> </script>
+     <script src="<%= url %>/assets/appjs/morechart.js"> </script>
+    <script src="<%= url %>/assets/appjs/areachart.js"> </script>
+    <script src="<%= url %>/assets/appjs/scatterchart.js"> </script>
+     <script src="<%= url %>/assets/appjs/3dchart.js"> </script>
+     <script src="<%= url %>/assets/appjs/gaugechart.js"> </script>
+ 
+
+ 
+
+

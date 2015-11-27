@@ -1,0 +1,79 @@
+    <% include header.html   %>
+    <% include sidebar.html   %> 
+       
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			
+      <div class="row addDeviceContent">
+
+       <div class="col-md-10 col-sm-10"> 
+           <h2 style="font-size:25px; color:#fff">Action List</h2> 
+       </div> 
+
+       <div class="col-md-2 col-sm-2"> 
+          <a href="<%=url%>/actions/addAction">
+            <button class="btn btn-primary btn-block">Create Action</button>
+          </a>
+       </div>
+
+       <% if(msg != ''){ %>
+             <div class="col-md-12 col-sm-12"> 
+                <p style="color:#fff; text-align:center;"><%=msg%></p>
+             </div>
+       <% } %>
+
+			  <!-- begin col-12 -->
+			    <div class="col-md-12 col-sm-12"> 
+              <!-- show data into datatable -->
+                <table id="actions-list" class="display" width="100%"></table>
+              <!-- end datatable-->
+          </div>   
+			  <!-- end row -->
+				
+		</div>
+		<!-- end #content -->
+		
+       
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+
+  <link rel="stylesheet" type="text/css" href="<%=url%>/assets/datatable/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="<%=url%>/assets/datatable/css/shCore.css">
+
+
+  <script type="text/javascript" language="javascript" src="<%=url%>/assets/datatable/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" language="javascript" src="<%=url%>/assets/datatable/js/shCore.js"></script>
+
+
+  <script type="text/javascript">
+     // $(document).ready(function() {
+
+        var dataSet = <%-JSON.stringify(actions)%>;
+      
+          $('#actions-list').DataTable( {
+            data: dataSet,
+            columns: [
+              { title: "S.No" },
+              { title: "Name" },
+              { title: "Sensor Name" },
+              { title: "Function" },
+              { title: "Operator" },
+              { title: "Value" },
+              { title: "Edit" },
+              { title: "Delete" }
+            ]
+          } );
+       // } );
+
+      $(document).on('click','.delete-action', function(){
+          if(confirm('Are you sure?')){
+              window.location.href='<%=url%>/actions/deleteAction/?token=kiox'+$(this).data('id')+'&d='+$(this).data('id');
+          }
+      });
+
+  </script>

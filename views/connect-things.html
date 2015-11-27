@@ -1,0 +1,254 @@
+<div class="col-md-8" >
+  <div class="leftcontiner">
+   <div class="row connectHeader">
+            <span>DEVICE</span>
+            <span class="pull-right"><i class="fa fa-power-off"></i></span>
+         </div> 
+   <section class="connectBody">
+    <div class="row ">
+        <div class="col-md-2">
+            <img src="<%=url%>/<%=device.image%>" alt=""  height="80" width="80"/>
+        </div>
+        <div class="col-md-10">
+            <p><input  type="text" id="thingName" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Thing Name'" placeholder="Enter Thing Name" class="textInput"/></p>
+            <div class="col-md-6">
+                <div class="row">
+                    <label>Devices : </label>
+                   <!--  <input type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Device'"  placeholder="Enter Device" class="textInput"/> -->
+                   <%=device.name %>
+                </div>
+                <div class="row">
+                    <label>Owner : </label>
+                    <input type="text"  placeholder="Enter owner" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter owner'" class="textInput"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label>ID : </label>
+                  <input type="text"  placeholder="Enter ID" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter ID'" class="textInput"/>
+                </div>
+                <div class="row">
+                    <label>Last Updated : </label>
+                    <span> 11 min ago</span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row row-space">
+        <p><i class="fa fa-desktop"></i> <span class="lineheader">CONNECTION MONITORING</span>  </p>
+        <div class="row">
+            <div class="col-md-6"><span class="disconnected"><i class="fa fa-circle"></i> disConnected </span></div>
+            <div class="col-md-6"> <input type="text"  placeholder="TYPE &#xf040;" onfocus="this.placeholder = ''" onblur="this.placeholder = 'TYPE &#xf040;'" class="textInput icon"/> </div>
+        </div>
+        <div class="row row-space">
+            <div class="col-md-6"><p>LAST COMMUNICATION</p><p>22 minutes ago</p></div>
+            <div class="col-md-6"><p>REQUIRED INTERVAL <i class="fa fa-pencil"></i></p>
+            <p><span class="timeSpan">10</span><span> Minutes</span></p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+             <span class=" switch-icon-span">  <i class="fa fa-circle"></i> </span> 
+              <span class="pull-left">Turn on Maintenance </span>                                 
+        <span class="pull-left"><div class="onoffswitch ">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchMaintenance" >
+            <label class="onoffswitch-label" for="myonoffswitchMaintenance">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+           
+            </div>    
+        </span>
+         
+        </div>
+    </div>
+    </div>                            
+    <div class="row row-space">
+        <div class="col-md-6">
+            <p><i class="fa fa-cog"></i> <span class="lineheader2">Hardware</span>  </p>
+        </div>
+        <div class="col-md-6">
+            <p><i class="fa fa-mobile"></i> <span class="lineheader2">Mobile</span>  </p>
+        </div>
+      </div>
+    <div class="row ">
+            <div class="col-md-6">
+                <p>Model <i class="fa fa-pencil"></i></p>
+                <input type="text"  placeholder="Enter Device" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Device'" class="textInput"/>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    <p class="text-center">mission</p>
+                   
+                    <input type="text"  placeholder="324567" class="textInputcode"/>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">imsi</p>
+                    <input type="text"  placeholder="324567" class="textInputcode"/>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">lac</p>
+                   <input type="text"  placeholder="324567" class="textInputcode"/>
+                </div>
+            </div>
+        </div>
+    <div class="row ">
+            <div class="col-md-6">
+                <p>SERIAL NUMBER <i class="fa fa-pencil"></i></p>
+                <input type="text"  placeholder="Enter Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Number'" class="textInput"/>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    <p class="text-center">imei</p>
+                   <input type="text"  placeholder="324567" class="textInputcode"/>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">iccid</p>
+                   <input type="text"  placeholder="324567" class="textInputcode"/>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">cell id</p>
+                    <input type="text"  placeholder="324567" class="textInputcode"/>
+                </div>
+            </div>
+        </div>
+    <div class="row ">
+            <div class="col-md-6">
+                <p>REVISION <i class="fa fa-pencil"></i></p>
+               <input type="text"  placeholder="Enter Device" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Device'" class="textInput"/>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-4">
+                    <p class="text-center">mcc</p>
+                   <input type="text"  placeholder="324567" class="textInputcode"/>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">mmc</p>
+                    <input type="text"  placeholder="324567" class="textInputcode"/>
+                </div>
+                <div class="col-md-4">
+                   
+                </div>
+            </div>
+        </div>
+    <div class="row row-space">
+        <p><i class="fa fa-edit"></i> <span class="lineheader">Notes</span>  </p>
+        <div class="col-md-12">
+            <textarea  rows="10">This shows how a device looks like in Kiox. The data is static, so you will not see much of a change and you cannot run any remote control commands on it.
+            </textarea>
+        
+        </div>
+       
+    </div>
+    <div class="row row-space">
+        <p><i class="fa fa-file-code-o"></i> <span class="lineheader">installation code</span>  </p>
+        <div class="col-md-12">
+            <textarea  rows="10">This shows how a device looks like in Kiox. The data is static, so you will not see much of a change and you cannot run any remote control commands on it.
+            </textarea>
+        
+        </div>
+       
+    </div>
+   </section>
+   </div>
+</div>
+<div class="col-md-4" >
+	<div class="rightcontiner">
+        <div class="row connectHeader">
+            <span> 
+                <span class="modules-show" style="cursor: pointer;">
+                 <img src="assets/img/squre-icon.png" alt="" /> modules </span>/ 
+                <span class="sensors-show" style="cursor: pointer;"><img src="assets/img/triangle-icon.png" alt="" /> sensors </span>
+            </span>                                   
+        </div> 
+        <div class="row connectHeader">
+            <span><input type="checkbox" /> <span class="select-item-name">Modules </span> </span> 
+             <span class="pull-right switch-icon-span">  <i class="fa fa-circle"></i> </span>                                  
+            <span class="pull-right"><div class="onoffswitch ">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchALL" >
+                <label class="onoffswitch-label" for="myonoffswitchALL">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+                </div>    
+            </span>
+        </div> 
+
+        <%  var sensorflag='block' 
+
+             if(modules.length > 0 ){ 
+
+                sensorflag = 'none'
+
+                modules.forEach(function(val, key){ %>
+
+                     <div class="row gridRow modules">
+                        <input type="checkbox" />
+                        <img src="assets/img/Resistive-Touch-icon.png" alt=""  class="img-icon"/>
+                        <span class="textWrap"><%= val.name %></span>
+                        <div class="pull-right">
+                       <span class="pull-right switch-icon-span">  <i class="fa fa-circle"></i> </span>
+                        <span class="pull-right"><div class="onoffswitch ">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" >
+                            <label class="onoffswitch-label" for="myonoffswitch">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                            </div>    
+                        </span>                                
+                         <img src="assets/img/triangle-icon.png" alt="" />
+                        <img src="assets/img/setting-circle-icon.png" alt="" />
+                        </div>                            
+                     </div>
+        
+        <%        })
+            } 
+        %>
+
+        <% if(sensors.length > 0 ){
+                sensors.forEach(function(val, key){ %>
+
+                     <div class="row gridRow sensors" style="display:<%=sensorflag%>">
+                        <input type="checkbox" />
+                        <img src="assets/img/Resistive-Touch-icon.png" alt=""  class="img-icon"/>
+                        <span class="textWrap"><%= val.name %></span>
+                        <div class="pull-right">
+                       <span class="pull-right switch-icon-span">  <i class="fa fa-circle"></i> </span>
+                        <span class="pull-right"><div class="onoffswitch ">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" >
+                            <label class="onoffswitch-label" for="myonoffswitch">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                            </div>    
+                        </span>                                
+                         <img src="assets/img/triangle-icon.png" alt="" />
+                        <img src="assets/img/setting-circle-icon.png" alt="" />
+                        </div>                            
+                     </div>
+        
+        <%        })
+            } 
+        %>
+
+      
+      </div>
+   </div>
+<!-- end row -->	
+<script>
+    
+    $('.modules-show').click(function(){
+        $('.sensors').hide();
+        $('.modules').show();
+        $('.select-item-name').text('Modules');
+    });
+
+    $('.sensors-show').click(function(){
+        $('.modules').hide();
+        $('.sensors').show();
+        $('.select-item-name').text('Sensors');
+    });
+
+</script>		
+</div> 

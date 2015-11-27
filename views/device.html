@@ -1,0 +1,241 @@
+    <% include header.html   %>
+    <% include sidebar.html   %>
+
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<div class="deviceContent">
+             <!-- Tab Links Start -->  
+            	<div class="row">
+                	<div class="col-md-12">
+                    <div class="text-center">
+                	 	<ul class="nav nav-pills" id="devicesSelect">
+                        <li class="active">
+                        	<a data-toggle="pill" class="devices-icon" href="#chooseDevice" targetFooter="footerLink1"><img src="assets/img/c-device.png" class="img-responsive chooseDevice"/></a>
+                            <i class="fa fa-check green-color"></i><span> Choose Device</span>
+                        </li>
+                        <li><hr class="line"/></li>
+                        <li><a data-toggle="pill" class="modules-icon" href="#chooseModules" targetFooter="footerLink2"> <img src="assets/img/c-module.png" class="img-responsive chooseModules" /></a>
+                        	<i class="fa fa-check green-color"></i><span> Choose Modules</span>
+                        </li>
+                          <li><hr class="line"/></li>
+                        <li><a data-toggle="pill" class="sensors-icon" href="#chooseSensors" targetFooter="footerLink3"><img src="assets/img/c-sensors.png" class="img-responsive chooseSensors"/></a>
+                        	 <i class="fa fa-check green-color"></i><span> Choose Sensors</span>
+                        </li>
+                          <li><hr class="line"/></li>
+                        <li><a data-toggle="pill" href="#connect" class="connect-icon" targetFooter="footerLink4"><img src="assets/img/c-connect.png" class="img-responsive connect" /></a>
+                        	 <i class="fa fa-check green-color"></i><span class="connect"> Connect</span>
+                        </li>
+                         <li><hr class="line"/></li>
+                        <li><a data-toggle="pill" href="#build" class="build-icon" targetFooter="footerLink5"><img src="assets/img/c-build.png" class="img-responsive build"/></a>
+                        	<i class="fa fa-check green-color"></i><span class="build"> Build</span>
+                        </li>
+                      </ul>
+                      </div>
+
+                    </div>
+
+                </div>
+                
+                <div class="col-md-2">
+
+                    <button class="btn btn-lg btn-primary things-step" style="float:right" style="width:10%;">Next</button>
+                </div>
+
+                <br/><br/><br/>
+              <!-- Tab Links End -->  
+                 <div class="row"> 
+                 	<div class="col-md-12"> 
+                      <!-- Tab Start -->                
+                 	 <div class="tab-content">
+                        <!-- choose Module Tab Start -->	
+                        <div id="chooseDevice" class="tab-pane fade in active ">                    
+                          <div class="row addDeviceContent">
+
+                            <% if(device.length > 0){ 
+
+                                device.forEach(function(value, key){ 
+
+                                var token = value._id+'kioxApp'
+                            %>
+                            
+                            <div class="col-md-3 col-sm-6">                
+                                <div class="panel panel-default selectDevice" data-id="<%=value._id%>">
+                                 <div class="panel-heading device-header">
+                                 <div class="clearfix"><span class="pull-right"><i class="fa fa-check display-hide green-color" style="display: none;"></i></span></div>
+                                  <div class="text-center"><img src="<%= url+"/"+value.image %>" class=""></div>                 
+                                 </div>
+                                  <div class="panel-body">
+                                    <h5><%= value.name %></h5>
+                                      <div class="row">
+                                             <!-- <div class="col-md-6 pull-left"><span>Home Device</span></div> -->
+                                             <div class="col-md-6 "><span class="pull-right"> <i class="fa fa-info"></i></span></div>
+                                        </div>
+                                  </div>                
+                                </div>              
+                            </div>
+
+                            <% 
+                                })
+                              } 
+                            %> 		
+
+                          </div>
+                        
+                        </div>
+                        <!-- choose Module Tab Start -->	
+                        <div id="chooseModules" class="tab-pane fade">                     
+                            <div class="row addDeviceContent modulesList">
+                              <!--	show modules here -->
+                            </div>
+                        </div>  
+
+                         <!-- choose Sensors Tab Start -->
+                        <div id="chooseSensors" class="tab-pane fade">                    
+                          <div class="row addDeviceContent sensorsList">			   
+                              <!--show sensors -->
+                         </div>                         
+                        </div>
+
+                         <!-- connect Tab Start -->
+                        <div id="connect" class="tab-pane fade ">                    
+                          <div class="row connectDiv connected-things">
+                            <!-- show connected things -->      				
+                        </div>
+
+                         <!--Build Tab Start -->
+                        <div id="build" class="tab-pane fade">                                        
+                          <div class="row buildContent leftcontiner">
+                                <div class="col-md-2 apiPart">                                	
+                                	 <div class="row connectHeader">
+                                        <i class="fa fa-file-code-o"></i> <span> API Explorer</span>                                       
+                                     </div> 
+                                     <div class="row"> 
+                                        <div class="col-md-12">                                   	
+     									 <div class="tabs-left">
+                                         	<h5><i class="fa fa-angle-down"></i> Endpoints</h5>
+                                            <ul class="nav nav-tabs endPointMenu">
+                                              <li class="active"><a href="#a" data-toggle="tab">GET getForecasts</a></li>
+                                              <li><a href="#b" data-toggle="tab">GET getForecasts</a></li>
+                                              <li><a href="#c" data-toggle="tab">GET getForecasts</a></li>
+                                              <li><a href="#d" data-toggle="tab">GET getForecasts</a></li>
+                                              <li><a href="#e" data-toggle="tab">GET getForecasts</a></li>
+                                              <li><a href="#f" data-toggle="tab">GET getForecasts</a></li>
+                                            </ul>
+                                          
+                                          </div><!-- /tabbable -->
+                                        </div>    
+                                     </div>                                    
+                                </div> 
+                                <div class="col-md-4 endPointPart">                                	
+                                	<div class="row connectHeader">
+                                        <span>Endpoints</span>                                       
+                                     </div> 
+                                     <div class="row">
+                                     	<div class="col-md-12"> 
+                                     	  <div class="tab-content">
+                                              <div class="tab-pane active" id="a">
+                                               <p class="blue-color">getForecasts</p>
+                                               <p>Gets forecast given a location</p>
+                                               <p>URL PARAMETERS</p>
+                                               <p>Location STRING
+                                                    <select class="selectInput">
+                                                        <option>India</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                               </p>
+                                          </div>
+                                              <div class="tab-pane" id="b">
+                                                <p>tab 2</p>
+                                              </div>
+                                              <div class="tab-pane" id="c">CCCCThirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae.</div>
+                                              <div class="tab-pane" id="d">DDDDDSecondo sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+                                              <div class="tab-pane" id="e">EEEEEThirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae.</div>
+                                              <div class="tab-pane" id="f">FFFFFFThirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae.</div>
+                                            </div><!-- /tab-content -->
+                                        </div>
+                                     </div>                                   
+                                </div> 
+                                <div class="col-md-6 languagePart">                                
+                                	  <div class="row connectHeader">
+                                        <ul class="nav nav-tabs">                                                       
+                                            <li class="active"><a data-toggle="tab" href="#CURL">CURL</a></li>
+                                            <li><a data-toggle="tab" href="#JAVA">JAVA</a></li>
+                                            <li><a data-toggle="tab" href="#NODE">NODE</a></li>
+                                            <li><a data-toggle="tab" href="#phpTab">PHP</a></li>
+                                            <li><a data-toggle="tab" href="#menu2">PYTHON</a></li>
+                                            <li><a data-toggle="tab" href="#phpTab">OBJECTIVE-C</a></li>
+                                            <li><a data-toggle="tab" href="#menu2">RUBY</a></li>
+                                            <li><a data-toggle="tab" href="#phpTab">.NET</a></li>
+                                             <li><a data-toggle="tab" href="#phpTab"> OPEN IN PAW</a></li>
+                                        </ul> 
+                                     </div> 
+                                      <div class="tab-content">
+                                            <div id="CURL" class="tab-pane fade in active">
+                                              <h4>ENDPOINT DEFINITION</h4>
+                                               <a href="#" class="getcode">GET</a>
+                                               <textarea  rows="10">This shows how a device looks like in Kiox. The data is static, so you will not see much of a change and you cannot run any remote control commands on it.
+                                        </textarea>
+                                               
+                                              <h4>REQUEST EXAMPLE </h4>
+                                               <a href="#" class="getcode"><i class="fa fa-files-o"></i></a>
+                                               <textarea  rows="10">This shows how a device looks like in Kiox. The data is static, so you will not see much of a change and you cannot run any remote control commands on it.
+                                        </textarea>
+                                              
+                                               
+                                              <h4>RESPONSE BODY </h4>
+                                              <p>WeatherCondition</p>
+                                               <a href="#" class="getcode">GET</a>
+                                               <textarea  rows="10">This shows how a device looks like in Kiox. The data is static, so you will not see much of a change and you cannot run any remote control commands on it.
+                                        </textarea>
+                                              
+                                            </div>
+                                            <div id="JAVA" class="tab-pane fade">
+                                              <h3>Menu 1</h3>
+                                             
+                                            </div>
+                                            <div id="NODE" class="tab-pane fade">
+                                              <h3>Menu 2</h3>
+                                              
+                                            </div>
+                                            <div id="phpTab" class="tab-pane fade">
+                                              <h3>Menu 3</h3>
+                                             
+                                            </div>
+                                          </div>                                 
+                                </div> 
+                            </div>
+                        </div>
+                  	</div>
+                    <!-- Tab End -->
+                     <!--footer pagination Start -->
+                     <div class="row">
+                 		<div class="col-md-12 ">
+                        	<div class="devices-pagination">
+                    			<nav class="pull-right">
+                                	<div class="currentFooter"></div>
+                                <ul class="pagination pagination-sm">                         
+                        	 <li><a href="#"><i class="fa fa-circle" id="footerLink1"></i></a></li>
+                            <li><a href="#"><i class="fa fa-circle " id="footerLink2"></i></a></li>
+                            <li><a href="#"><i class="fa fa-circle" id="footerLink3"></i></a></li>
+                            <li><a href="#"><i class="fa fa-circle" id="footerLink4"></i></a></li>
+                            <li><a href="#"><i class="fa fa-circle last" id="footerLink5"></i></a></li>                            
+                        </ul></nav>
+                          		
+                        	</div>
+                    </div>
+                 </div> 
+                                                    
+                 </div>
+               </div> 
+             </div>    
+		<!-- end #content -->
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+
+<% include footer-device.html %>

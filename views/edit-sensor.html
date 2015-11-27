@@ -1,0 +1,113 @@
+    <% include header.html   %>
+    <% include sidebar.html   %>
+       
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			
+      <div class="row addDeviceContent">
+			  <!-- begin col-3 -->
+			    <div class="col-md-6 col-sm-6"> 
+
+          <form class="add-module" action="<%=url %>/sensors/updateSensor" method="post" enctype="multipart/form-data">
+            <h2>Edit Sensor</h2> 
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Device</label>
+                <select name="deviceId" id="deviceId" class="form-control input-group">
+                    <option value="">Select Device</option>
+                    <% if(device.length > 0){ %>
+                      <% device.forEach(function(val, key){ %>
+                       <option value="<%=val._id%>"
+                        <% if( val._id == sensors.device_id){ %>selected<% } %> ><%=val.name%></option>
+                      <% }) %>
+                    <% } %>
+                </select>
+                <input type="hidden" id="deviceName" name="deviceName" value="<%=sensors.deviceName %>">
+                <span class="deviceId-msg"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Sensor Name</label>
+                <input type="text" id="sensorName" name="sensorName" value="<%=sensors.name %>" class="form-control input-group" placeholder="Sensor Name" autofocus>
+                <span class="sensorName-msg"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Sensor Image</label>
+                <input type="file" id="image" name="image" class="form-control input-group" placeholder="Username" autofocus>
+                <span class="image-msg"></span> 
+                <span>Standard size: 70x85 Dimension (width = 70 and height = 85)</span>
+              </div>
+
+
+              <!-- <div class="checkbox" >
+                  <p></p>
+              </div> -->
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Update Sensor</button>
+                <input type="hidden" name="d" value="<%=sensors._id%>" />
+                <input type="hidden" name="img" value="<%=sensors.image%>" />
+
+          </form>
+
+              <div class="col-md-6 col-sm-6 " style="margin-top:20px;"> 
+                  <div>
+                      <img src="<%=url+'/'+sensors.image%>"> 
+                  </div>
+              </div>
+
+          </div>   
+			  <!-- end row -->
+						
+		</div>
+		<!-- end #content -->
+		
+       
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+
+  <script type="text/javascript">
+    // var _URL = window.URL;
+    // $("#image").change(function (e) {
+    //     var file, img;
+    //     if ((file = this.files[0])) {
+    //         img = new Image();
+    //         img.onload = function () {
+    //             if( this.width > 70 || this.height > 90){
+    //               alert("File size too much. You can't upload it");
+    //               $("#image").val('');
+    //               $("#image").focus();
+    //             }
+    //             //this will give you image width and height and you can easily validate here....
+    //         };
+    //         img.src = _URL.createObjectURL(file);
+    //     }
+    // });
+
+    $('#deviceId').change(function(){
+        $('#deviceName').val($('#deviceId option:selected').text()); 
+    })
+
+    $('.add-module').submit(function(){
+        
+        if( $('#deviceId').val() == '' ){
+            $('.deviceId-msg').text('Please select device*');
+            $('#deviceId').focus();
+            return false;
+        }
+
+        if( $('#sensorName').val() == '' ){
+            $('.sensorName-msg').text('Please enter sensor name*');
+            $('#sensorName').focus();
+            return false;
+        }
+
+        return true;
+    });
+
+  </script>

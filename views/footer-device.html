@@ -1,0 +1,299 @@
+<!-- ================== BEGIN BASE JS ================== -->
+	<script src="<%=url%>/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+	<script src="<%=url%>/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+	<script src="<%=url%>/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+	<script src="<%=url%>/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="<%=url%>/assets/crossbrowserjs/html5shiv.js"></script>
+		<script src="<%=url%>/assets/crossbrowserjs/respond.min.js"></script>
+		<script src="<%=url%>/assets/crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+	<script src="<%=url%>/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="<%=url%>/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="<%=url%>/assets/plugins/morris/raphael.min.js"></script>
+    <script src="<%=url%>/assets/plugins/morris/morris.js"></script>
+    <script src="<%=url%>/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="<%=url%>/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js"></script>
+    <script src="<%=url%>/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
+	<script src="<%=url%>/assets/plugins/gritter/js/jquery.gritter.js"></script>
+	<script src="<%=url%>/assets/js/dashboard-v2.min.js"></script>
+	<script src="<%=url%>/assets/js/apps.min.js"></script>
+	<script src="<%=url%>/assets/appjs/device.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	
+	<script>
+
+	var domain = '<%=url%>';
+	var deviceId ='',tmpModules = [], tmpSensors=[];
+	var counter = 0;
+
+	var steps = ['modules-icon', 'sensors-icon', 'connect-icon', 'build-icon'];
+
+		// function get modules list
+		function getModulesInfo(){
+
+			if( deviceId != '' ){
+				var data = { token: deviceId+'kioxApp', d: deviceId};
+
+				// get modules information
+				var modules = getModules(data, domain+'/modules/getDeviceModules');
+
+				if( modules.data.length > 0 ){
+
+					var html = '';
+
+					// show all modules list
+					$.each(modules.data, function(key, val){
+
+						html += '<div class="col-md-3 col-sm-6">'+               
+			                    '<div class="panel panel-default" data-id="'+val._id+'">'+
+			                    '<div class="panel-heading device-header">'+
+			                    '<div class="clearfix"><span class="pull-right"><i class="fa fa-check display-hide green-color"></i></span></div>'+
+			                      '<div class="text-center"><img src="'+(domain+'/'+val.image)+'" /></div>'+               
+			                     '</div>'+
+			                      '<div class="panel-body">'+
+			                        '<h4>'+val.name+'</h4>'+
+			                          '<div class="row">'+
+			                                 '<div class="col-md-6 pull-left"><span>'+val.deviceName+'</span></div>'+
+			                                 '<div class="col-md-6 "><span class="pull-right"> <i class="fa fa-info"></i></span></div>'+
+			                            '</div>'+
+			                      '</div>'+                
+			                    '</div>'+              
+			                '</div>';
+					});
+
+					$('.modulesList').append(html);
+					tmpModules = [];
+					$('.modules-icon').click();				
+				}
+				else{
+					alert('Sorry, modules not found');
+				}
+			}
+			else{
+				alert('Please select any device');
+			}
+			
+		}
+
+		// get sensors list
+		function getSensorsInfo(){
+
+			if( tmpModules.length > 0 ){
+
+				var data = { token: tmpModules.join('-')+'kioxApp', mod: JSON.stringify(tmpModules)};
+
+				// get modules information
+				var sensors = getModules(data, domain+'/sensors/getModulesSensors');
+
+				var html= '';
+				$('.sensorsList').html('');
+				$.each(sensors.data, function(key, val){
+					
+					html +='<div class="col-md-3 col-sm-6">'+                
+                            '<div class="panel panel-default" data-id="'+val._id+'">'+
+                            '<div class="panel-heading device-header">'+
+                             '<div class="clearfix"><span class="pull-right"><i class="fa fa-check display-hide green-color"></i></span></div>'+
+                              '<div class="text-center"><img src="'+(domain+'/'+val.image)+'" /></div>'+              
+                             '</div>'+
+                              '<div class="panel-body">'+
+                                '<h4>'+val.name+'</h4>'+
+                                  '<div class="row">'+
+                                         '<div class="col-md-6 pull-left"><span>'+val.deviceName+'</span></div>'+
+                                         '<div class="col-md-6 "><span class="pull-right"> <i class="fa fa-info"></i></span></div>'+
+                                    '</div>'+
+                              '</div>'+                
+                            '</div>'+              
+                       '</div>';
+                });
+
+				$('.sensorsList').append(html);	
+				tmpSensors=[];		
+				$('.sensors-icon').click();		
+			}
+			else{
+				alert('Please select modules');
+			}
+		}
+
+		function getSelectItemInfo(){
+
+
+			if( tmpSensors.length > 0 ){
+
+				var data = { token: tmpSensors.join('-')+'kioxApp', sensor: JSON.stringify(tmpSensors)};
+
+				// get modules information
+				var itemInfo = getInfo(data, domain+'/devices/getSelectItemInfo');
+				//$('.connected-things').remove();
+				$('.connected-things').html(itemInfo);
+
+				$('.connect-icon').click();
+			}
+			else{
+				alert('Please select sensors');
+			}
+		}
+
+		function saveThing(){
+
+			if( $('#thingName').val() != '' ){
+				var result = saveInfo({thingName: $('#thingName').val()}, domain+'/devices/createThing');
+				//$('#thingName').val('');
+				console.log('result=>'+result);
+			}
+		}
+
+		// next button steps
+		$(document).ready(function(){
+			$('.things-step').click(function(){
+
+				if( steps[counter] == 'modules-icon'){
+
+					getModulesInfo();
+					counter++;
+				}
+
+				else if( steps[counter] == 'sensors-icon' ){
+
+					getSensorsInfo();
+					counter++;
+				}
+
+				else if( steps[counter] == 'connect-icon' ){
+					getSelectItemInfo();
+					counter++;
+				}
+
+				else if( steps[counter] == 'build-icon' ){
+					saveThing();
+					counter++;
+				}
+			});
+
+			$(document).on('click', '.build-icon', function(){
+				$('.connected-things').hide();
+			});
+
+		});
+
+
+		$(document).ready(function() {			
+			App.init();
+			DashboardV2.init();
+			
+		});
+
+		$( document ).on("shown.bs.tab",'a[data-toggle="tab"]',function() {
+			var target = $(this).attr('href');				
+				$(target).animate({
+					"left":"-200px",
+					"opacity":".6"
+				},1000);
+				$(target).css('opacity',0.6);
+				$(target).animate({
+					"left":"44px",
+					"opacity":"1"
+				},1000);
+		});
+		$( document ).on("click",'.onoffswitch-label',function() {
+			$(this).parent('div').parent('span').prev('span').prev('span').children('i').toggleClass('green-color');
+			$(this).parent('div').parent('span').prev('span').children('i').toggleClass('green-color');
+		});
+		
+		// select device
+		$( document ).on("click",'.selectDevice',function() {
+
+			$('.selectDevice').removeClass("active");
+			$('.selectDevice').find('img').removeClass('activeImage');
+			$('.selectDevice').find('i.fa-check').hide();
+
+			$(this).addClass("active");
+			$(this).find('i.fa-check').show();
+			$(this).find('img').addClass('activeImage');
+
+			deviceId = $(this).data('id');	
+
+			counter = 0;
+
+		});
+		
+		// select module
+		$( document ).on("click",'#chooseModules .panel-default',function() {
+			
+			$(this).toggleClass('active');			
+			$(this).find('i.fa-check').toggle();
+			$(this).find('img').toggleClass('activeImage');
+
+			if( $(this).hasClass('active') ){
+				tmpModules.push( $(this).attr('data-id').toString() );
+			}
+			else{
+				tmpModules.splice( tmpModules.indexOf($(this).attr('data-id').toString()),1 );
+			}
+
+			counter = 1;
+			
+		});
+		
+		$( document ).on("click",'#chooseSensors .panel-default',function() {
+			$(this).toggleClass('active');			
+			$(this).find('i.fa-check').toggle();
+			$(this).find('img').toggleClass('activeImage');	
+
+			if( $(this).hasClass('active') ){
+				tmpSensors.push( $(this).attr('data-id').toString() );
+			}
+			else{
+				tmpSensors.splice( tmpSensors.indexOf($(this).attr('data-id').toString()),1 );
+			}
+
+			counter = 2;
+
+		});
+		//$( document ).on("click",'.editable',function() {
+//			$(this).css("display","none").parent("div.typeEdit").empty().attr("contenteditable","true").focus();		
+//					
+//		});
+		
+		//$( document ).on("blur",'div.typeEdit',function() {
+//			$(this).attr("contenteditable","false").text("TYPE").find("i.editable").css("display","block");		
+//					
+//		});
+		
+		$('ul#devicesSelect li i').hide();
+		$('ul#devicesSelect').each(function(){
+			$(this).on('click', 'a', function(e){
+					var footer=	$(this).attr('targetFooter');					
+					var active = $(this).parent('li');					
+					var prevli = $(this).parent('li').prevAll('li');
+					 active.find('img.chooseDevice').attr("src","assets/img/c-device-blue.png");
+					 active.find('img.chooseModules').attr("src","assets/img/c-module-blue.png");
+					 active.find('img.chooseSensors').attr("src","assets/img/c-sensors-blue.png");
+					 active.find('img.connect').attr("src","assets/img/c-connect-blue.png");
+				     active.find('img.build').attr("src","assets/img/c-build-blue.png");
+					 active.find('span').addClass('blue-color');
+					 active.prevAll('li').find('span').removeClass('blue-color').addClass('green-color').prev('i').show();					 					
+					 active.prevAll('li').find('hr.line').addClass('currentAction');
+					 
+					 prevli.find('img.chooseDevice').attr("src","assets/img/c-device-green.png");
+					 prevli.find('img.chooseModules').attr("src","assets/img/c-module-green.png");
+					 prevli.find('img.chooseSensors').attr("src","assets/img/c-sensors-green.png");
+					 prevli.find('img.connect').attr("src","assets/img/c-connect-green.png");
+					 prevli.find('img.build').attr("src","assets/img/c-build-green.png");
+					
+					 var x=$('#' + footer).parent('a').position();
+					
+				     $(".currentFooter").show().css("left",x.left+965);
+					 $('#' + footer +'.last').css("color","yellow");
+					 $('#' + footer).parent('a').parent('li').prevAll('li').children('a').children('i').addClass('green-color');
+				});
+		});
+		
+</script>
+		
+</body>
+</html>

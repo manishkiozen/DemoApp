@@ -1,0 +1,129 @@
+    <% include header.html   %>
+    <% include sidebar.html   %>
+
+    <style type="text/css">
+
+    .whiteText, label{
+      color: #fff !important;
+    }
+
+    .k-state-default{
+        height: 31px;
+    }
+
+    </style>
+       
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			
+      <div class="row addDeviceContent">
+			  <!-- begin col-3 -->
+			    <div class="col-md-6 col-sm-6"> 
+
+          <form class="add-device" action="<%=url%>/alarm/setAlarm" method="GET">
+            <h2 class="form-signin-heading whiteText" style="font-size:20px;">Set Alarm</h2>
+
+              <div class="form-group">
+                <label for="inputEmail whiteText" class="">Alarm Name</label>
+                <input type="text" name="alarmName" id="alarmName" placeholder="Alarm Name" class="form-control input-group">
+                <span class="alarmName-msg"></span>
+              </div>
+
+              <div class="form-group">
+               <div class="sensors-list">
+                <label for="inputEmail whiteText" class="">Sensor</label>
+                <select id="sensor" name="sensorId[]" class="form-control input-group sensor">
+                    <option value="">Select Sensor</option>
+
+                    <% if(sensors.length > 0){
+                     
+                      sensors.forEach(function(val, key){ %>
+                    
+                    <option value="<%=val._id%>"><%=val.name%></option> 
+                    
+                    <% }) 
+
+                    }
+
+                    %>
+
+                </select>
+                <input type="hidden" name="sensorName[]" value="">
+                <span class="sensor-msg"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail whiteText" class="sr-only">Action</label>
+                <div id="actions-list"><div class="sensor-action">
+                  <select name="action[]" class="form-control input-group action_list">
+                      <option >Select Action</option>
+                  </select><span class="action-msg"></span></div>
+                </div>
+                               
+                <div class="more-action whiteText" style="cursor:pointer;">Add</div>
+              </div>
+
+              <div id="more-action"></div>
+
+              <div class="form-group">
+
+                  <input type="text" style="width: 50%; float: right;" name="time_value" value="" id="time_value" class="form-control input-group" placeholder="Interval Time">
+
+                  <span class="time_picker" style="display:none;">
+                   <input type="text" style="width: 50%; float: right;" id="time_picker" class="form-control input-group" placeholder="Time"> 
+                  </span> 
+
+                  <label class="whiteText">Set Interval</label>
+                  <input type="radio" id="interval" checked name="time" value="interval" >
+                  <label class="whiteText">Set Time</label>
+                  <input type="radio" id="time" name="time" value="time">
+                  
+                  <div class="time-msg"></div>
+
+              </div>
+
+              <div class="form-group">
+               
+                  <label class="whiteText">Send SMS</label>
+                  <input type="checkbox" name="aletby[]" id="sms" value="sms">
+                 
+                  <label class="whiteText">Send Mail</label>
+                  <input type="checkbox" name="aletby[]" id="mail" value="mail" >
+
+                  <label class="whiteText">Call to Action</label>
+                  <input type="checkbox" name="aletby[]" id="callToAction" value="callToAction" >
+
+                  <div class="alertby-msg"></div>
+              </div>
+               <div class="form-group" style="display:none;" id="callAction">
+                  <input type="text" id="call-action" name="callActionName" class="form-control input-group" placeholder="Call To Action"> 
+                   <span class="call-to-action-msg"></span>
+               </div>
+
+                <div class="checkbox">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Set Alarm</button>
+                </div>
+
+          </form>
+          </div>   
+			  <!-- end row -->
+						
+		</div>
+		<!-- end #content -->
+		
+       
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+
+ <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css" />
+  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.default.min.css" />
+
+  <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script> 
+
+  <script type="text/javascript" src="<%=url%>/assets/appjs/alarm.js"></script>

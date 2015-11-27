@@ -1,0 +1,78 @@
+    <% include header.html   %>
+    <% include sidebar.html   %>
+       
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			
+      <div class="row addDeviceContent">
+			  <!-- begin col-3 -->
+			    <div class="col-md-6 col-sm-6"> 
+
+            <h2>Control Remote Device</h2> 
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Command</label>
+                
+                <textarea id="command" name="command" class="form-control input-group"></textarea>
+                <span class="command-msg"></span>
+              </div>
+
+              <!-- <div class="checkbox" >
+                  <p></p>
+              </div>
+ -->
+              <button class="btn btn-lg btn-primary btn-block" id="execute-btn" >Excute</button>
+
+          </div>   
+			  <!-- end row -->
+						
+		</div>
+		<!-- end #content -->
+		
+       
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+
+  <script>
+
+        // room join
+        socket.emit('joinRoom', '<%=room%>');
+
+        $('body').on("click", "#execute-btn", function(){
+
+          $('.command-msg').text();
+
+            if( $('#command').val().length > 3 ){  
+
+              if(socketFlag){
+                  
+                  $('.command-msg').text('Command excuting.......');
+                  
+                  socket.emit('remoteCommand',  $('#command').val(), function(res){
+                      if(res){
+                          $('.command-msg').text('Command send to client machine');
+                          $('#command').val('');
+                      }
+                  });
+              }
+              else{
+                  $('.command-msg').text('Socket could not connected with server');
+              }
+              
+            }
+            else{
+              alert('Please enter command');
+            }
+        });
+
+        // get command status
+        socket.on('commandStatus', function(status){
+            $('.command-msg').text(status);
+        });
+
+  </script>

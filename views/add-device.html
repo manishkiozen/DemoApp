@@ -1,0 +1,83 @@
+    <% include header.html   %>
+    <% include sidebar.html   %>
+       
+		<!-- begin #content -->
+		<div id="content" class="content">			
+			
+      <div class="row addDeviceContent">
+			  <!-- begin col-3 -->
+			    <div class="col-md-6 col-sm-6"> 
+
+          <form class="add-device" action="<%=url %>/managedevice/addDevice" method="post" enctype="multipart/form-data">
+            <h2 class="form-signin-heading">Add New Device</h2>
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Device Name</label>
+                <input type="text" id="deviceName" name="deviceName" class="form-control input-group" placeholder="Device Name" autofocus>
+                <span class="deviceName-msg"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail" class="sr-only">Device Image</label>
+                <input type="file" id="image" name="image" class="form-control input-group" placeholder="Username" autofocus>
+                <span class="image-msg"></span>
+                <span>Standard size: 70x85 Dimension (width = 70 and height = 85)</span>
+              </div>
+
+
+              <!-- <div class="checkbox" >
+                  <p></p>
+              </div>
+ -->
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Add Device</button>
+
+          </form>
+          </div>   
+			  <!-- end row -->
+						
+		</div>
+		<!-- end #content -->
+		
+       
+		<!-- begin scroll to top btn -->
+		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	<!-- end page container -->
+	
+  <% include footer.html %>
+
+  <script type="text/javascript">
+    var _URL = window.URL;
+    // $("#image").change(function (e) {
+    //     var file, img;
+    //     if ((file = this.files[0])) {
+    //         img = new Image();
+    //         img.onload = function () {
+    //             if( this.width > 70 || this.height > 90){
+    //               alert("File size too much. You can't upload it");
+    //               $("#image").val('');
+    //               $("#image").focus();
+    //             }
+    //             //this will give you image width and height and you can easily validate here....
+    //         };
+    //         img.src = _URL.createObjectURL(file);
+    //     }
+    // });
+
+    $('.add-device').submit(function(){
+        if( $('#deviceName').val() == '' ){
+            $('.deviceName-msg').text('Please enter device name*');
+            $('#deviceName').focus();
+            return false;
+        }
+
+         if( $('#image').val() == '' ){
+            $('.image-msg').text('Please select device image*');
+            $('#image').focus();
+            return false;
+        }
+
+        return true;
+    });
+
+  </script>

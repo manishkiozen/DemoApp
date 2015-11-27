@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://kiozen.com/wp-content/uploads/2015/05/favicon.ico">
+
+    <title>Sign Up || KIOX App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<%= url %>/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="<%= url %>/assets/css/signin.css" rel="stylesheet">
+
+    <script src="<%= url %>/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" method="post" action="<%= url %>/signup/addNewUser">
+
+        <div>
+          <img src="http://kiozen.com/wp-content/uploads/2015/04/logo_kiozen.png">
+        </div>
+
+        <h2 class="form-signin-heading">Sign Up</h2>
+
+          <div class="form-group">
+            <label for="inputEmail" class="sr-only">Name</label>
+            <input type="text" id="name" name="name" class="form-control input-group" placeholder="Name" autofocus>
+            <span class="name-msg"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="email" name="email" class="form-control input-group" placeholder="Email address" autofocus>
+            <span class="email-msg"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control input-group" placeholder="Username" autofocus>
+            <span class="username-msg"></span>
+          </div>
+
+          <div class="form-group">
+           <label for="inputPassword" class="sr-only">Password</label>
+           <input type="password" id="password" name="password" class="form-control input-group" placeholder="Password">
+           <span class="password-msg"></span>
+          </div>
+
+          <div class="form-group">
+           <label for="inputPassword" class="sr-only">Confirm Password</label>
+           <input type="password" id="confirmPassword" name="confirmPassword" class="form-control input-group" placeholder="Confirm Password">
+           <span class="confirm-password-msg"></span>
+          </div>
+
+          <div class="checkbox">
+            
+              <a href="<%= url %>/login">Sign In</a>
+          </div>
+          
+
+       <% if( errors ){ %>  
+       
+       <div  class="checkbox">
+          <%= errors %>
+       </div>
+
+       <% } %>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+      </form>
+
+    </div> <!-- /container -->
+
+     <script type="text/javascript">
+      $( document ).ready(function() {
+            
+        $('.form-signin').submit(function(){
+
+            $('.name-msg').text('');
+            $('.email-msg').text('');
+            $('.username-msg').text('');
+            $('.password-msg').text('');
+            $('.confirm-password-msg').text('');
+
+            /*********** name validation *****************/
+            if( $('#name').val() == '' ){
+               $('.name-msg').text('Please enter your name*');
+               return false;
+            }
+
+            if( $('#name').val().length < 3 ){
+               $('.name-msg').text('Please enter atleast 3 characters in name*');
+               return false;
+            }
+            /*********** end name validation *****************/
+
+            /*********** email validation *****************/
+            if( $('#email').val() == '' ){
+               $('.email-msg').text('Please enter your e-mail address*');
+               return false;
+            }
+
+            var email = $('#email').val();
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+            if (!filter.test(email)) {
+              $('.email-msg').text('Please provide a valid email address*');
+              $('#email').focus;
+              return false;
+            }
+
+            /*********** end email validation *****************/
+
+            /*********** username validation *****************/
+            if( $('#username').val() == '' ){
+               $('username-msg').text('Please enter username*');
+               return false;
+            }
+
+            if( $('#username').val().length < 8 ){
+               $('.username-msg').text('Please enter atleast 8 characters in username*');
+               return false;
+            }
+            /*********** end name validation *****************/
+
+            /*********** password validation *****************/
+            if( $('#password').val() == '' ){
+               $('.password-msg').text('Please enter password*');
+               return false;
+            }
+
+            if( $('#password').val().length < 8 ){
+               $('.password-msg').text('Please enter atleast 8 digit in password*');
+               return false;
+            }
+            /*********** end password validation *****************/
+
+            /*********** confirm password validation *********/
+            if( $('#confirmPassword').val() == '' ){
+               $('.confirm-password-msg').text('Please enter confirm password*');
+               return false;
+            }
+
+            if( $('#confirmPassword').val() != $('#password').val() ){
+               $('.confirm-password-msg').text('Confirm password should be same as password*');
+               return false;
+            }
+            /*********** end confirm password validation *****************/
+
+            return true;
+        });
+
+        $('#username').keyup(function(){
+          
+            $('.username-msg').text('');
+
+            if( $(this).val() != '' ){
+              $.ajax({
+                url: '/signup/checkUsername',
+                type: 'post',
+                data: {username: $(this).val()},
+                success: function(res){
+                  if(res == 1){
+                    //$('.username-msg').text('Username available!');
+                  }
+                  else{
+                    $('.username-msg').html('Username <strong>'+$(this).val()+'</strong> not available!');
+                    $(this).val('');
+                    $(this).focus();
+                  }
+                },
+
+                error: function(error){
+                   $('.username-msg').text('Error occured while check username!');
+                   $(this).focus();
+                }
+
+              })            
+            }
+
+        });
+      
+      });
+
+     </script>
+   
+  </body>
+</html>
